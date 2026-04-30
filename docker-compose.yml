@@ -1,0 +1,52 @@
+version: '3.8'
+
+services:
+  # 1. O Banco de Dados (PostgreSQL)
+  db:
+    image: postgres:15-alpine
+    container_name: mb_postgres
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: mightyblade
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    # NOVIDADE: Fica testando se o banco acordou a cada 5 segundos
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U root -d mightyblade"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. A API (Nosso Node.js + Prisma)
+  backend:
+    build: ./backend
+    container_name: mb_backend
+    environment:
+      - PORT=3000
+      - DATABASE_URL=postgresql://root:root@db:5432/mightyblade?schema=public
+      # JWT_SECRET vem do arquivo .env na raiz (NÃO versionado).
+      # Veja .env.example para o template.
+      - JWT_SECRET=${JWT_SECRET}
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        # NOVIDADE: Só liga o backend DEPOIS que o banco estiver 'saudável'
+        condition: service_healthy
+
+  # 3. O Frontend (Servidor Web Nginx)
+  frontend:
+    image: nginx:alpine
+    container_name: mb_frontend
+    ports:
+      - "8080:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:

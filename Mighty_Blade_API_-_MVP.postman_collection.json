@@ -1,0 +1,361 @@
+{
+  "info": {
+    "_postman_id": "1835a6e5-df8d-4b1d-9087-3d09712db028",
+    "name": "Mighty Blade API - MVP",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "38071938"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "token_jogador",
+      "value": ""
+    },
+    {
+      "key": "token_mestre",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Cadastro de Jogador",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Arkanos\",\n  \"email\": \"jogador@email.com\",\n  \"senha\": \"senha123\",\n  \"perfil\": \"JOGADOR\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/cadastro",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "cadastro"]
+            }
+          },
+          "response": [
+            {
+              "name": "201 - Cadastro com sucesso",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"id\": \"cbaa9840-22c8-4c22-8143-ace6acad5884\",\n  \"nome\": \"Arkanos\",\n  \"email\": \"jogador@email.com\",\n  \"perfil\": \"JOGADOR\"\n}"
+            },
+            {
+              "name": "400 - Email já cadastrado",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Email já cadastrado.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Cadastro de Mestre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Mestre da Forja\",\n  \"email\": \"mestre@email.com\",\n  \"senha\": \"senha123\",\n  \"perfil\": \"MESTRE\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/cadastro",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "cadastro"]
+            }
+          },
+          "response": [
+            {
+              "name": "201 - Cadastro com sucesso",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"id\": \"d1f9b09a-55a3-4e12-9f8c-1a2b3c4d5e6f\",\n  \"nome\": \"Mestre da Forja\",\n  \"email\": \"mestre@email.com\",\n  \"perfil\": \"MESTRE\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login de Jogador",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"jogador@email.com\",\n  \"senha\": \"senha123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Login com sucesso",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+            },
+            {
+              "name": "401 - Credenciais inválidas",
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Email ou senha inválidos.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Login de Mestre",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"mestre@email.com\",\n  \"senha\": \"senha123\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/auth/login",
+              "host": ["{{base_url}}"],
+              "path": ["api", "auth", "login"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Login com sucesso",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"token\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Personagens",
+      "item": [
+        {
+          "name": "Criar Personagem",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token_jogador}}", "type": "string" }] },
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"nome\": \"Gimli, o Destruidor\",\n  \"racaId\": \"anao\",\n  \"classeId\": \"guerreiro\"\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/personagens",
+              "host": ["{{base_url}}"],
+              "path": ["api", "personagens"]
+            }
+          },
+          "response": [
+            {
+              "name": "201 - Ficha forjada com sucesso",
+              "status": "Created",
+              "code": 201,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"id\": 1,\n  \"nome\": \"Gimli, o Destruidor\",\n  \"nivel\": 1,\n  \"vidaAtual\": 60,\n  \"manaAtual\": 60,\n  \"racaId\": \"anao\",\n  \"classeId\": \"guerreiro\",\n  \"jogadorId\": \"cbaa9840-22c8-4c22-8143-ace6acad5884\",\n  \"mestreId\": null\n}"
+            },
+            {
+              "name": "400 - Campos obrigatórios ausentes",
+              "status": "Bad Request",
+              "code": 400,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Falha ao forjar a ficha.\"\n}"
+            },
+            {
+              "name": "401 - Token ausente ou inválido",
+              "status": "Unauthorized",
+              "code": 401,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Token não fornecido ou inválido.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Listar Personagens do Usuário",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token_jogador}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/personagens",
+              "host": ["{{base_url}}"],
+              "path": ["api", "personagens"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Lista de personagens",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "[\n  {\n    \"id\": 1,\n    \"nome\": \"Gimli, o Destruidor\",\n    \"nivel\": 1,\n    \"vidaAtual\": 60,\n    \"manaAtual\": 60,\n    \"racaId\": \"anao\",\n    \"classeId\": \"guerreiro\",\n    \"raca\": { \"nome\": \"Anão\" },\n    \"classe\": { \"nome\": \"Guerreiro\" }\n  }\n]"
+            },
+            {
+              "name": "200 - Lista vazia",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "[]"
+            }
+          ]
+        },
+        {
+          "name": "Buscar Personagem por ID",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token_jogador}}", "type": "string" }] },
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/personagens/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "personagens", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Personagem encontrado",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"id\": 1,\n  \"nome\": \"Gimli, o Destruidor\",\n  \"nivel\": 1,\n  \"vidaAtual\": 60,\n  \"manaAtual\": 60,\n  \"racaId\": \"anao\",\n  \"classeId\": \"guerreiro\",\n  \"jogadorId\": \"cbaa9840-22c8-4c22-8143-ace6acad5884\",\n  \"mestreId\": null,\n  \"raca\": { \"id\": \"anao\", \"nome\": \"Anão\", \"forcaBase\": 4, \"agilidadeBase\": 2, \"inteligenciaBase\": 3, \"vontadeBase\": 3 },\n  \"classe\": { \"id\": \"guerreiro\", \"nome\": \"Guerreiro\", \"bonusForca\": 1, \"bonusAgilidade\": 1, \"bonusInteligencia\": 0, \"bonusVontade\": 0 }\n}"
+            },
+            {
+              "name": "404 - Personagem não encontrado",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Personagem não encontrado.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Editar Personagem (Mestre)",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token_mestre}}", "type": "string" }] },
+            "method": "PUT",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"vidaAtual\": 45,\n  \"manaAtual\": 30,\n  \"nivel\": 2\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{base_url}}/api/personagens/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "personagens", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Ficha atualizada",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"id\": 1,\n  \"nome\": \"Gimli, o Destruidor\",\n  \"nivel\": 2,\n  \"vidaAtual\": 45,\n  \"manaAtual\": 30,\n  \"racaId\": \"anao\",\n  \"classeId\": \"guerreiro\"\n}"
+            },
+            {
+              "name": "403 - Sem permissão",
+              "status": "Forbidden",
+              "code": 403,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Acesso negado. Permissão insuficiente.\"\n}"
+            }
+          ]
+        },
+        {
+          "name": "Deletar Personagem",
+          "request": {
+            "auth": { "type": "bearer", "bearer": [{ "key": "token", "value": "{{token_jogador}}", "type": "string" }] },
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/personagens/1",
+              "host": ["{{base_url}}"],
+              "path": ["api", "personagens", "1"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Ficha deletada",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"mensagem\": \"Ficha deletada com sucesso.\"\n}"
+            },
+            {
+              "name": "404 - Personagem não encontrado",
+              "status": "Not Found",
+              "code": 404,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "{\n  \"erro\": \"Personagem não encontrado.\"\n}"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Catálogo",
+      "item": [
+        {
+          "name": "Buscar Raças",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/catalogo/racas",
+              "host": ["{{base_url}}"],
+              "path": ["api", "catalogo", "racas"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Lista de raças",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "[\n  {\n    \"id\": \"anao\",\n    \"nome\": \"Anão\",\n    \"forcaBase\": 4,\n    \"agilidadeBase\": 2,\n    \"inteligenciaBase\": 3,\n    \"vontadeBase\": 3\n  },\n  {\n    \"id\": \"elfo\",\n    \"nome\": \"Elfo\",\n    \"forcaBase\": 2,\n    \"agilidadeBase\": 4,\n    \"inteligenciaBase\": 3,\n    \"vontadeBase\": 3\n  }\n]"
+            }
+          ]
+        },
+        {
+          "name": "Buscar Classes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/api/catalogo/classes",
+              "host": ["{{base_url}}"],
+              "path": ["api", "catalogo", "classes"]
+            }
+          },
+          "response": [
+            {
+              "name": "200 - Lista de classes",
+              "status": "OK",
+              "code": 200,
+              "header": [{ "key": "Content-Type", "value": "application/json" }],
+              "body": "[\n  {\n    \"id\": \"guerreiro\",\n    \"nome\": \"Guerreiro\",\n    \"bonusForca\": 1,\n    \"bonusAgilidade\": 1,\n    \"bonusInteligencia\": 0,\n    \"bonusVontade\": 0\n  },\n  {\n    \"id\": \"feiticeiro\",\n    \"nome\": \"Feiticeiro\",\n    \"bonusForca\": 0,\n    \"bonusAgilidade\": 0,\n    \"bonusInteligencia\": 1,\n    \"bonusVontade\": 1\n  }\n]"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

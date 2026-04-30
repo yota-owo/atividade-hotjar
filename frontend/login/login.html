@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acesso - A Runa</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <link rel="stylesheet" href="../assets/css/global.css">
+    <link rel="stylesheet" href="login.css">
+</head>
+<body class="flex items-center justify-center p-4">
+
+    <main class="login-container">
+        <a href="../index/index.html" class="btn-voltar">
+            <svg viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+            Voltar
+        </a>
+
+        <header class="login-header">
+            <h2 class="text-gold text-3xl font-bold tracking-wider">A RUNA</h2>
+            <p id="form-subtitle" class="text-muted mt-2">Identifique-se para forjar sua lenda.</p>
+        </header>
+
+        <form id="form-login" class="mb-form">
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="email" required placeholder="seu@email.com">
+            </div>
+
+            <div class="input-group">
+                <label>Senha</label>
+                <input type="password" required placeholder="••••••••">
+            </div>
+
+            <div class="flex justify-end">
+                <button type="button" class="btn-link" onclick="alert('🚧 Recuperação indisponível no MVP.')">Esqueceu a senha?</button>
+            </div>
+
+            <button type="submit" class="btn-primary">Entrar</button>
+
+            <p class="text-muted mt-4 text-center text-sm">
+                Não tem uma conta? <button type="button" class="btn-link font-bold" onclick="toggleForm('cadastro')">Cadastre-se</button>
+            </p>
+        </form>
+
+        <form id="form-cadastro" class="mb-form hidden">
+            <div class="input-group">
+                <label>Nome de Usuário</label>
+                <input type="text" id="cad-nome" required minlength="3" placeholder="Ex: Arkanos">
+            </div>
+
+            <div class="input-group">
+                <label>E-mail</label>
+                <input type="email" id="cad-email" required placeholder="seu@email.com">
+            </div>
+
+            <div class="grid grid-cols-2 gap-4">
+                <div class="input-group">
+                    <label>Senha</label>
+                    <input type="password" id="cad-senha" required minlength="6" placeholder="••••••••">
+                </div>
+                <div class="input-group">
+                    <label>Confirmar</label>
+                    <input type="password" id="cad-confirma" required minlength="6" placeholder="••••••••">
+                </div>
+            </div>
+
+            <div class="perfil-group">
+                <label>Escolha seu Caminho:</label>
+                <input type="hidden" id="cad-perfil" name="perfil" value="jogador">
+                <div class="perfil-toggle">
+                    <button type="button" class="perfil-btn active" data-value="jogador">Jogador</button>
+                    <button type="button" class="perfil-btn" data-value="mestre">Mestre da Forja</button>
+                </div>
+            </div>
+
+            <button type="submit" class="btn-outline">Criar Conta</button>
+
+            <p class="text-muted mt-4 text-center text-sm">
+                Já possui acesso? <button type="button" class="btn-link font-bold" onclick="toggleForm('login')">Fazer Login</button>
+            </p>
+        </form>
+    </main>
+
+    <script src="login.js"></script>
+</body>
+</html>

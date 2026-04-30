@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meus Personagens - A Forja</title>
+
+    <link rel="stylesheet" href="../assets/css/global.css" />
+    <link rel="stylesheet" href="dashboard.css" />
+  </head>
+  <body>
+    <header class="dashboard-header">
+      <div class="dashboard-header-inner">
+        <a href="../index/index.html" class="header-logo">
+          <h1 class="text-gold">A RUNA</h1>
+        </a>
+
+        <div class="header-actions">
+          <span class="header-saudacao" id="header-saudacao">
+            Saudações, <b>Carregando...</b>
+          </span>
+          <a href="#" onclick="sairDaConta(event)" class="btn-sair">Sair da Conta</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="dashboard-main">
+      <div class="dashboard-title-section">
+        <div>
+          <h2>Meus Personagens</h2>
+          <p>Gerencie suas fichas forjadas no Arquivo Etéreo.</p>
+        </div>
+        <button
+          onclick="window.location.href = '../personagem/personagem.html'"
+          class="btn-primary"
+        >
+          + Forjar Nova Lenda
+        </button>
+      </div>
+
+      <div class="search-bar">
+        <div class="search-input-wrapper">
+          <input
+            type="text"
+            id="inputBusca"
+            placeholder="Buscar herói por nome..."
+            class="search-input"
+          />
+        </div>
+
+        <select id="filtroRaca" class="filter-select">
+          <option value="todas">Todas as Raças</option>
+          <option value="Anão">Anões</option>
+          <option value="Elfo">Elfos</option>
+        </select>
+
+        <select id="filtroClasse" class="filter-select">
+          <option value="todas">Todas as Classes</option>
+          <option value="Guerreiro">Guerreiros</option>
+          <option value="Feiticeiro">Feiticeiros</option>
+        </select>
+      </div>
+
+      <div id="gridPersonagens" class="personagens-grid"></div>
+
+      <div id="emptyState" class="empty-state hidden">
+        <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"
+          ></path>
+        </svg>
+        <h3>Nenhuma lenda encontrada</h3>
+        <p>Parece que o Arquivo Etéreo não encontrou registros com esses filtros.</p>
+      </div>
+    </main>
+
+    <!-- Modal de Edição (visível apenas para Mestre) -->
+    <div id="modal-edicao" class="modal-overlay hidden">
+      <div class="modal-box">
+        <h3 class="modal-titulo">Editar Ficha</h3>
+
+        <input type="hidden" id="edit-id" />
+
+        <div class="modal-campo">
+          <label>Nome do Personagem</label>
+          <input type="text" id="edit-nome" class="modal-input" />
+        </div>
+
+        <div class="modal-grid">
+          <div class="modal-campo">
+            <label>Vida Atual</label>
+            <input type="number" id="edit-vida" min="0" max="999" class="modal-input" />
+          </div>
+          <div class="modal-campo">
+            <label>Mana Atual</label>
+            <input type="number" id="edit-mana" min="0" max="999" class="modal-input" />
+          </div>
+        </div>
+
+        <div class="modal-acoes">
+          <button onclick="fecharModal()" class="btn-editar">Cancelar</button>
+          <button onclick="confirmarEdicao()" class="btn-primary">Salvar Alterações</button>
+        </div>
+      </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+  </body>
+</html>

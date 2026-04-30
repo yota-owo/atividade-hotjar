@@ -1,0 +1,4 @@
+# pack-refs with: peeled fully-peeled sorted 
+76e39a8e1a92bf92b4c834be89392aa67497cd0d refs/remotes/origin/feat/backend
+e75abdf6bd09c111e4d05ee4c1226d32dea993ce refs/remotes/origin/feat/crud-edit-mestre
+b16c978a5d65733dad3832bbecc8f5efbb490be3 refs/remotes/origin/main

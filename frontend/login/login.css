@@ -1,0 +1,153 @@
+/* Container do Card de Login */
+.login-container {
+    background-color: var(--mb-card);
+    border: 1px solid var(--mb-border);
+    padding: 2rem;
+    border-radius: var(--radius-lg);
+    width: 100%;
+    max-width: 28rem;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    position: relative;
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    margin-top: 1rem;
+}
+
+/* Grupos de Input */
+.mb-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.input-group label {
+    display: block;
+    font-size: 0.875rem;
+    color: var(--mb-muted);
+    margin-bottom: 0.25rem;
+}
+
+.input-group input {
+    width: 100%;
+    background-color: var(--mb-dark);
+    border: 1px solid var(--mb-border);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 1rem;
+    color: var(--mb-text);
+    transition: border-color 0.3s ease;
+}
+
+.input-group input:focus {
+    outline: none;
+    border-color: var(--mb-gold);
+}
+
+/* Botões Customizados */
+.btn-primary {
+    width: 100%;
+    background-color: var(--mb-gold);
+    color: var(--mb-dark);
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-primary:hover {
+    background-color: var(--mb-gold-hover);
+}
+
+.btn-outline {
+    width: 100%;
+    background-color: transparent;
+    color: var(--mb-gold);
+    border: 2px solid var(--mb-gold);
+    font-weight: bold;
+    padding: 0.5rem;
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.btn-outline:hover {
+    background-color: var(--mb-gold);
+    color: var(--mb-dark);
+}
+
+.btn-link {
+    background: none;
+    border: none;
+    color: var(--mb-gold);
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.btn-link:hover {
+    text-decoration: underline;
+}
+
+/* Botão Voltar Estilizado */
+.btn-voltar {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    color: var(--mb-muted);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.875rem;
+    text-decoration: none;
+}
+
+.btn-voltar svg {
+    width: 1rem;
+    height: 1rem;
+    fill: none;
+    stroke: currentColor;
+}
+
+.btn-voltar:hover {
+    color: var(--mb-gold);
+}
+
+/* Seletor de Caminho (estilo botão toggle) */
+.perfil-group > label {
+    color: var(--mb-muted);
+    font-size: 0.875rem;
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.perfil-toggle {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+}
+
+.perfil-btn {
+    background-color: transparent;
+    color: var(--mb-muted);
+    border: 1px solid var(--mb-border);
+    border-radius: var(--radius-md);
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.perfil-btn:hover {
+    border-color: var(--mb-gold);
+    color: var(--mb-gold);
+}
+
+.perfil-btn.active {
+    background-color: transparent;
+    border: 2px solid var(--mb-gold);
+    color: var(--mb-gold);
+}

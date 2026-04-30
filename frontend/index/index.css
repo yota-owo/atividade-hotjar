@@ -1,0 +1,140 @@
+/* ==========================================
+   ESTILOS ESPECÍFICOS DA HOME (INDEX)
+========================================== */
+
+/* Header e Navegação */
+.site-header {
+    background-color: var(--mb-card);
+    border-bottom: 1px solid var(--mb-border);
+    padding: 1rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+}
+
+.btn-header {
+    display: inline-block;
+    padding: 0.5rem 1.5rem;
+    border: 2px solid var(--mb-gold);
+    color: var(--mb-gold);
+    font-weight: 600;
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.btn-header:hover {
+    background-color: var(--mb-gold);
+    color: var(--mb-dark);
+}
+
+/* Cards de Funcionalidades */
+.feature-card {
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    background-color: var(--mb-card);
+    border: 1px solid var(--mb-border);
+    border-radius: var(--radius-lg);
+    text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--mb-gold);
+    box-shadow: 0 10px 25px -5px rgba(212, 175, 55, 0.2); /* Sombra dourada */
+}
+
+.card-icon {
+    width: max-content;
+    padding: 0.75rem;
+    background-color: var(--mb-dark);
+    border-radius: var(--radius-md);
+    margin-bottom: 1rem;
+    color: var(--mb-gold);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card-icon svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+.feature-card:hover .card-icon {
+    background-color: var(--mb-gold);
+    color: var(--mb-dark);
+}
+
+.feature-card h3 {
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: #ffffff;
+    margin-bottom: 0.5rem;
+}
+
+.feature-card p {
+    font-size: 0.875rem;
+    color: var(--mb-muted);
+}
+
+/* Estado de "Em Breve" (Work In Progress) */
+.feature-card.wip {
+    opacity: 0.55;
+    cursor: not-allowed;
+}
+
+.feature-card.wip:hover {
+    transform: none;
+    border-color: var(--mb-border);
+    box-shadow: none;
+    opacity: 0.65;
+}
+
+.feature-card.wip .card-icon {
+    color: #6b7280;
+}
+
+.feature-card.wip:hover .card-icon {
+    background-color: var(--mb-dark);
+    color: #6b7280;
+}
+
+.badge-wip {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: #ca8a04; /* Amarelo escuro */
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 0.25rem 0.5rem;
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+/* Footer */
+.site-footer {
+    border-top: 1px solid var(--mb-border);
+    margin-top: 3rem;
+    padding: 1.5rem 0;
+    font-size: 0.875rem;
+    color: var(--mb-muted);
+}
+
+.footer-links a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.footer-links a:hover {
+    color: var(--mb-gold);
+}
+
+.footer-links .separator {
+    color: var(--mb-border);
+    margin: 0 0.5rem;
+}

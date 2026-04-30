@@ -1,0 +1,76 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Perfil {
+  JOGADOR
+  MESTRE
+}
+
+model Usuario {
+  id                   String       @id @default(uuid())
+  nome                 String
+  email                String       @unique
+  senha                String
+  perfil               Perfil       @default(JOGADOR)
+  criadoEm             DateTime     @default(now())
+  
+  // Relação 1: Fichas que este usuário criou (Sendo Jogador)
+  personagensCriados   Personagem[] @relation("JogadorCriador")
+  
+  // Relação 2: Fichas enviadas para este usuário (Sendo Mestre)
+  personagensMestrados Personagem[] @relation("MestreVinculado")
+}
+
+model Raca {
+  id               String       @id
+  nome             String       @unique
+  forcaBase        Int
+  agilidadeBase    Int
+  inteligenciaBase Int
+  vontadeBase      Int
+  personagens      Personagem[]
+}
+
+model Classe {
+  id                String       @id
+  nome              String       @unique
+  bonusForca        Int
+  bonusAgilidade    Int
+  bonusInteligencia Int
+  bonusVontade      Int
+  personagens       Personagem[]
+}
+
+model Personagem {
+  id              Int      @id @default(autoincrement())
+  nome            String
+  nivel           Int      @default(1)
+  xp              Int      @default(0)
+  vidaAtual       Int      @default(60) 
+  manaAtual       Int      @default(60)
+  
+  // NOVO: Campo para o Mestre fazer anotações ocultas sobre o jogador
+  anotacoesMestre String?  @db.Text
+
+  // RELAÇÃO 1: O Jogador dono da ficha
+  usuarioId       String
+  usuario         Usuario  @relation("JogadorCriador", fields: [usuarioId], references: [id])
+  
+  // RELAÇÃO 2: O Mestre da campanha (Pode ser nulo até o jogador enviar a ficha)
+  mestreId        String?
+  mestre          Usuario? @relation("MestreVinculado", fields: [mestreId], references: [id])
+  
+  racaId          String
+  raca            Raca     @relation(fields: [racaId], references: [id])
+  
+  classeId        String
+  classe          Classe   @relation(fields: [classeId], references: [id])
+
+  criadoEm        DateTime @default(now())
+}
